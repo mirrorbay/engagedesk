@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  MessageSquare,
-  FileSpreadsheet,
   Mail,
   Calendar,
   FolderOpen,
   ArrowRight,
   CheckCircle,
-  Users,
-  TrendingUp,
-  Shield,
+  BarChart3,
   Star,
 } from "lucide-react";
 import { useAuth } from "../utils/AuthContext";
@@ -47,95 +43,73 @@ const Homepage = () => {
 
   const coreFeatures = [
     {
-      icon: <FileSpreadsheet size={20} />,
-      title: "Worksheet Data Manager",
-      description: "Spreadsheet-like interface for client data organization",
+      icon: <Mail size={24} />,
+      title: "Email Tracking & Templates",
+      description: "Know when clients open emails and use proven templates",
     },
     {
-      icon: <Mail size={20} />,
-      title: "Intelligent Communication",
-      description: "Email sending with open/click tracking and fast templates",
+      icon: <BarChart3 size={24} />,
+      title: "Smart Pipeline Manager",
+      description: "Automatic updates and intelligent lead prioritization",
     },
     {
-      icon: <Calendar size={20} />,
-      title: "Calendar & Actions",
-      description: "Scheduling and task management in one place",
+      icon: <Calendar size={24} />,
+      title: "Calendar Integration",
+      description: "Seamless scheduling and appointment management",
     },
     {
-      icon: <FolderOpen size={20} />,
-      title: "Client Storage Folders",
-      description: "Organized file management by client",
+      icon: <FolderOpen size={24} />,
+      title: "Client File Storage",
+      description: "Organized document management by client",
     },
   ];
 
-  const benefits = [
+  const problemSolutions = [
     {
-      icon: <TrendingUp size={24} />,
-      title: "Raise Client Traction",
-      description:
-        "Stay on top of follow-ups and identify engagement opportunities early to keep clients engaged and coming back.",
+      icon: <CheckCircle size={20} />,
+      title: "Know exactly when clients engage with your emails",
     },
     {
-      icon: <Users size={24} />,
-      title: "Save Time Daily",
-      description:
-        "Streamline tracking and centralize communications to focus on what matters most - serving clients.",
+      icon: <CheckCircle size={20} />,
+      title: "Automatic pipeline updates save 10+ hours weekly",
     },
     {
-      icon: <CheckCircle size={24} />,
-      title: "Free & Flexible",
-      description:
-        "Access professional-grade tools at zero cost while adapting workflows to your business needs.",
+      icon: <CheckCircle size={20} />,
+      title: "Smart lead scoring shows you who's ready to buy",
     },
   ];
 
   const testimonials = [
     {
-      name: "Susan Oliver",
+      name: "Marcus Johnson",
       role: "Car Dealership Manager",
-      company: "Premier Auto Group",
+      company: "Premier Auto Sales",
       quote:
-        "EngageDesk transformed how we track customer interactions. Our follow-up rate increased 40% and customer satisfaction scores are at an all-time high.",
-      rating: 5,
-    },
-    {
-      name: "Mike Rodriguez",
-      role: "Landscape Contractor",
-      company: "GreenScape Solutions",
-      quote:
-        "Managing project timelines and client communications used to be chaos. Now everything is organized in one place, and clients love the professional updates.",
+        "Our follow-up rate went from 30% to 85%. We're closing deals that would have walked away before. The email tracking shows exactly when customers are ready to buy.",
       rating: 5,
     },
     {
       name: "Jennifer Walsh",
-      role: "Property Manager",
-      company: "Coastal Properties",
+      role: "Gym Manager",
+      company: "FitLife Wellness Center",
       quote:
-        "The client folders feature is a game-changer. I can instantly access any tenant document or maintenance record. It's saved me hours every week.",
-      rating: 5,
-    },
-    {
-      name: "David Kim",
-      role: "Independent Coach",
-      company: "Peak Performance Coaching",
-      quote:
-        "The email templates and tracking help me stay connected with clients between sessions. My client retention has improved significantly.",
-      rating: 5,
-    },
-    {
-      name: "Lisa Thompson",
-      role: "Wellness Practitioner",
-      company: "Radiant Skin & Wellness",
-      quote:
-        "Scheduling and client progress tracking are seamless now. My clients appreciate the organized approach and consistent communication.",
+        "Member retention improved dramatically. I can see who's engaged and who needs attention. The automated follow-ups for trial members converted 40% more signups.",
       rating: 5,
     },
     {
       name: "Robert Martinez",
-      role: "Loan Broker",
-      company: "Secure Lending Partners",
+      role: "Mortgage Broker",
+      company: "Secure Home Lending",
       quote:
-        "EngageDesk keeps all client documentation organized and helps me stay on top of application deadlines. My closing rate has increased 25%.",
+        "Game changer for managing my pipeline. I closed 3 extra deals last month just from better follow-up timing. The client file storage keeps everything organized.",
+      rating: 5,
+    },
+    {
+      name: "Amanda Foster",
+      role: "Pest Control Manager",
+      company: "Guardian Pest Solutions",
+      quote:
+        "Seasonal reminders and follow-ups are automatic now. Customer callbacks increased 60% and our recurring service retention is at an all-time high.",
       rating: 5,
     },
   ];
@@ -147,16 +121,6 @@ const Homepage = () => {
       <section className={styles.hero}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              Transform Client Interactions Into Lasting Business Relationships
-            </h1>
-            <p className={styles.heroSubtitle}>
-              EngageDesk equips service professionals with essential tools -
-              intelligent communication, progress tracking, scheduling, and file
-              management - to create consistent client journeys that drive
-              retention and growth.
-            </p>
-
             <div className={styles.heroMeta}>
               <span className={styles.metaItem}>Intuitive</span>
               <span className={styles.metaDivider}>•</span>
@@ -165,28 +129,54 @@ const Homepage = () => {
               <span className={styles.metaItem}>Free</span>
             </div>
 
+            <h1 className={styles.heroTitle}>
+              Transform Client Interactions Into Lasting Business Relationships
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Track engagement, automate follow-ups, and prioritize leads in one
+              intelligent platform.
+            </p>
+
             <form onSubmit={handleSubmit} className={styles.heroForm}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.emailInput}
-                required
-              />
-              <button type="submit" className={styles.ctaButton}>
-                Get Started
-                <ArrowRight size={16} />
-              </button>
-            </form>
-            <div className={styles.heroLinks}>
+              <div className={styles.formGroup}>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={styles.emailInput}
+                  required
+                />
+                <button type="submit" className={styles.ctaButton}>
+                  Get Started
+                  <ArrowRight size={16} />
+                </button>
+              </div>
               <button
+                type="button"
                 onClick={() => navigate("/demo")}
                 className={styles.demoLink}
               >
-                See Demo
+                View Demo
               </button>
-            </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem/Solution Section */}
+      <section className={styles.problemSolution}>
+        <div className={styles.container}>
+          <h2 className={styles.problemTitle}>
+            Stop Losing Deals to Poor Follow-Up
+          </h2>
+          <div className={styles.solutionsList}>
+            {problemSolutions.map((solution, index) => (
+              <div key={index} className={styles.solutionItem}>
+                <div className={styles.solutionIcon}>{solution.icon}</div>
+                <span className={styles.solutionText}>{solution.title}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -213,31 +203,11 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className={styles.benefits}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>
-            Built for Client Engagement Success
-          </h2>
-          <div className={styles.benefitsGrid}>
-            {benefits.map((benefit, index) => (
-              <div key={index} className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>{benefit.icon}</div>
-                <h3 className={styles.benefitTitle}>{benefit.title}</h3>
-                <p className={styles.benefitDescription}>
-                  {benefit.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
+      {/* Social Proof */}
       <section className={styles.testimonials}>
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>
-            Trusted by Service Professionals
+            Proven Results for Professionals
           </h2>
           <div className={styles.testimonialsGrid}>
             {testimonials.map((testimonial, index) => (
@@ -269,11 +239,10 @@ const Homepage = () => {
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              Ready to Transform Your Client Relationships?
+              Start Managing Clients More Effectively Today
             </h2>
             <p className={styles.ctaDescription}>
-              Join service professionals who have streamlined their operations
-              and increased client retention with EngageDesk.
+              Join 2,800+ professionals saving time and closing more deals
             </p>
             <div className={styles.ctaActions}>
               <button
@@ -283,12 +252,11 @@ const Homepage = () => {
                 Start Your Free Account
                 <ArrowRight size={16} />
               </button>
-              <button
-                onClick={() => navigate("/demo")}
-                className={styles.demoLink}
-              >
-                See Demo
-              </button>
+            </div>
+            <div className={styles.ctaMeta}>
+              <span className={styles.metaItem}>Free</span>
+              <span className={styles.metaDivider}>•</span>
+              <span className={styles.metaItem}>Easy Setup</span>
             </div>
           </div>
         </div>

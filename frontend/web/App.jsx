@@ -8,6 +8,7 @@ import {
 import { AuthProvider } from "./utils/AuthContext";
 import { AutoSaveProvider } from "./utils/AutoSaveContext";
 import { useAnalytics } from "./hooks/useAnalytics";
+import { useScrollToTop } from "./hooks/useScrollToTop";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 import PublicRoute from "./components/shared/PublicRoute";
 import AppLayout from "./components/shared/AppLayout";
@@ -27,9 +28,10 @@ import Knowledge from "./pages/Knowledge";
 import Settings from "./pages/Settings";
 import styles from "./styles/app.module.css";
 
-// Analytics wrapper component
-function AnalyticsWrapper({ children }) {
+// Shared wrapper component for global app functionality
+function AppWrapper({ children }) {
   useAnalytics();
+  useScrollToTop();
   return children;
 }
 
@@ -37,7 +39,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <AnalyticsWrapper>
+        <AppWrapper>
           <div className={styles.app}>
             <Routes>
               {/* Public routes - Homepage is accessible to everyone but logs out authenticated users */}
@@ -92,7 +94,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
-        </AnalyticsWrapper>
+        </AppWrapper>
       </Router>
     </AuthProvider>
   );

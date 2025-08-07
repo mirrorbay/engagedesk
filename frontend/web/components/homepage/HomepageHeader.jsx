@@ -27,7 +27,7 @@ const HomepageHeader = ({ onLogin }) => {
           </button>
           <button onClick={onLogin} className={styles.loginButton}>
             <LogIn size={16} />
-            Login
+            <span>Login</span>
           </button>
         </div>
       </div>

@@ -17,7 +17,7 @@ function Analytics() {
   const [filters, setFilters] = useState({
     days: 7,
     page_path: "",
-    showLocalIPs: false,
+    excludeLocalIPs: true,
   });
 
   const loadAnalyticsData = async () => {
@@ -31,6 +31,7 @@ function Analytics() {
           getAnalyticsData({
             page_path: filters.page_path || undefined,
             days: filters.days,
+            excludeLocalIPs: filters.excludeLocalIPs,
           }),
           getReferralSourceBreakdown(filters.days),
           getDailyAnalyticsChart(filters.days),
@@ -154,6 +155,32 @@ function Analytics() {
     );
   };
 
+  const renderLocationInfo = (location) => {
+    if (!location) return "Unknown";
+
+    const { country, region, city, isLocal } = location;
+
+    if (isLocal) {
+      return (
+        <div className={styles.locationCell}>
+          <div className={styles.locationLocal}>Local/Private</div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.locationCell}>
+        <div className={styles.locationCountry}>{country}</div>
+        {region !== "Unknown" && (
+          <div className={styles.locationRegion}>{region}</div>
+        )}
+        {city !== "Unknown" && (
+          <div className={styles.locationCity}>{city}</div>
+        )}
+      </div>
+    );
+  };
+
   if (error) {
     return (
       <div className={styles.container}>
@@ -217,6 +244,21 @@ function Analytics() {
           onChange={(e) => handleFilterChange("page_path", e.target.value)}
           className={styles.filterInput}
         />
+
+        <div className={styles.toggleContainer}>
+          <label className={styles.toggleLabel}>
+            <input
+              type="checkbox"
+              checked={filters.excludeLocalIPs}
+              onChange={(e) =>
+                handleFilterChange("excludeLocalIPs", e.target.checked)
+              }
+              className={styles.toggleCheckbox}
+            />
+            <span className={styles.toggleSlider}></span>
+            <span className={styles.toggleText}>Exclude Local IPs</span>
+          </label>
+        </div>
       </div>
 
       {/* Daily Analytics Charts */}
@@ -339,6 +381,7 @@ function Analytics() {
               <tr>
                 <th>Visit Time</th>
                 <th>IP Address</th>
+                <th>Location</th>
                 <th>Device Info</th>
                 <th>Page Path</th>
                 <th>Referrer</th>
@@ -352,6 +395,9 @@ function Analytics() {
                     {formatTimestamp(item.visit_timestamp)}
                   </td>
                   <td className={styles.ipCell}>{item.ip_address}</td>
+                  <td className={styles.locationCell}>
+                    {renderLocationInfo(item.location)}
+                  </td>
                   <td className={styles.deviceCell}>
                     {renderDeviceInfo(item.device_info)}
                   </td>

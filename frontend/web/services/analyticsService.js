@@ -47,9 +47,14 @@ export const trackClickEvents = async (clickData) => {
 // Get analytics data
 export const getAnalyticsData = async (params = {}) => {
   try {
-    // Filter out undefined values
+    // Filter out undefined values and convert boolean to string for URL params
     const cleanParams = Object.fromEntries(
-      Object.entries(params).filter(([_, value]) => value !== undefined)
+      Object.entries(params)
+        .filter(([_, value]) => value !== undefined)
+        .map(([key, value]) => [
+          key,
+          typeof value === "boolean" ? value.toString() : value,
+        ])
     );
 
     const queryString = new URLSearchParams(cleanParams).toString();

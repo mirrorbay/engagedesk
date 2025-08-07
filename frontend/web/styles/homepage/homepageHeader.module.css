@@ -100,4 +100,61 @@
   .logo h1 {
     font-size: var(--font-lg);
   }
+
+  .actions {
+    gap: var(--spacing-xs);
+  }
+
+  /* Make demo button a clean text link on mobile - no icon */
+  .demoButton {
+    background: none;
+    color: #0078d4;
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    box-shadow: none;
+    text-decoration: none;
+    font-weight: var(--font-medium);
+    font-size: var(--font-sm);
+    border-radius: 4px;
+    transition: var(--transition-normal);
+  }
+
+  .demoButton:hover {
+    background: rgba(0, 120, 212, 0.1);
+    color: #106ebe;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  .demoButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #0078d4;
+    border-radius: 4px;
+  }
+
+  /* Hide demo button icon on mobile */
+  .demoButton svg {
+    display: none;
+  }
+
+  /* Make login button compact with text only on mobile */
+  .loginButton {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-sm);
+    min-width: auto;
+    gap: 0;
+  }
+
+  /* Hide login button icon on mobile */
+  .loginButton svg {
+    display: none;
+  }
+
+  .loginButton span {
+    display: inline;
+  }
 }
