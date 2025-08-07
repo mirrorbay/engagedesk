@@ -85,9 +85,24 @@ const parseDeviceInfo = (userAgent) => {
   return { platform, os, browser };
 };
 
+// Helper function to check if we should track analytics for the current page
+const shouldTrackAnalytics = (pagePath) => {
+  // Never track analytics events on analytics pages
+  const analyticsPages = ["/analytics", "/app/analytics"];
+  return !analyticsPages.includes(pagePath);
+};
+
 // Track page visit
 const trackPageVisit = async (req, res) => {
   const { page_path, referrer } = req.body;
+
+  // Don't track analytics events on analytics pages
+  if (!shouldTrackAnalytics(page_path)) {
+    return res.status(200).json({
+      success: true,
+      message: "Analytics tracking skipped for analytics page",
+    });
+  }
 
   const ip_address = getClientIP(req);
   const user_agent = req.headers["user-agent"] || "";
@@ -116,6 +131,14 @@ const trackPageVisit = async (req, res) => {
 // Track click events
 const trackClickEvents = async (req, res) => {
   const { page_path, click_events } = req.body;
+
+  // Don't track analytics events on analytics pages
+  if (!shouldTrackAnalytics(page_path)) {
+    return res.status(200).json({
+      success: true,
+      message: "Analytics tracking skipped for analytics page",
+    });
+  }
 
   const ip_address = getClientIP(req);
   const user_id = null;
@@ -156,20 +179,49 @@ const trackVisitDuration = async (req, res) => {
   try {
     const { page_path, visit_duration, session_id } = req.body;
 
+    // Don't track analytics events on analytics pages
+    if (!shouldTrackAnalytics(page_path)) {
+      return res.status(200).json({
+        success: true,
+        message: "Analytics tracking skipped for analytics page",
+      });
+    }
+
     const ip_address = getClientIP(req);
     const user_id = null;
 
-    // Find the most recent analytics record for this session
+    // Find the most recent analytics record for this session within the last 30 minutes
+    const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
     const analyticsRecord = await Analytics.findOne({
       ip_address,
       page_path,
       user_id,
+      visit_timestamp: { $gte: thirtyMinutesAgo },
     }).sort({ visit_timestamp: -1 });
 
     if (analyticsRecord) {
       analyticsRecord.visit_duration = visit_duration;
       analyticsRecord.session_end_timestamp = new Date();
       await analyticsRecord.save();
+    } else {
+      // Create a new analytics record if none exists
+      const user_agent = req.headers["user-agent"] || "";
+      const device_info = parseDeviceInfo(user_agent);
+
+      const newRecord = new Analytics({
+        ip_address,
+        user_agent,
+        page_path,
+        referrer: "",
+        visit_timestamp: new Date(),
+        user_id,
+        device_info,
+        click_events: [],
+        visit_duration,
+        session_end_timestamp: new Date(),
+      });
+
+      await newRecord.save();
     }
 
     res.status(200).json({
@@ -190,14 +242,24 @@ const trackScrollEvents = async (req, res) => {
   try {
     const { page_path, scroll_events, max_scroll_depth } = req.body;
 
+    // Don't track analytics events on analytics pages
+    if (!shouldTrackAnalytics(page_path)) {
+      return res.status(200).json({
+        success: true,
+        message: "Analytics tracking skipped for analytics page",
+      });
+    }
+
     const ip_address = getClientIP(req);
     const user_id = null;
 
-    // Find the most recent analytics record for this session
+    // Find the most recent analytics record for this session within the last 30 minutes
+    const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
     const analyticsRecord = await Analytics.findOne({
       ip_address,
       page_path,
       user_id,
+      visit_timestamp: { $gte: thirtyMinutesAgo },
     }).sort({ visit_timestamp: -1 });
 
     if (analyticsRecord) {
@@ -215,6 +277,25 @@ const trackScrollEvents = async (req, res) => {
       }
 
       await analyticsRecord.save();
+    } else {
+      // Create a new analytics record if none exists
+      const user_agent = req.headers["user-agent"] || "";
+      const device_info = parseDeviceInfo(user_agent);
+
+      const newRecord = new Analytics({
+        ip_address,
+        user_agent,
+        page_path,
+        referrer: "",
+        visit_timestamp: new Date(),
+        user_id,
+        device_info,
+        click_events: [],
+        scroll_events: scroll_events || [],
+        max_scroll_depth: max_scroll_depth || 0,
+      });
+
+      await newRecord.save();
     }
 
     res.status(200).json({
