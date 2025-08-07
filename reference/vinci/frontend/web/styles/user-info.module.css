@@ -1,0 +1,555 @@
+/* User Info Page - Matching Home Page Design */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--background-white);
+  font-family: var(--font-primary);
+}
+
+/* Header Section - Matching Home */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.sessionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--text-black);
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.headerSubtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-grey);
+  font-weight: var(--font-weight-medium);
+  max-width: 600px;
+}
+
+/* Subscription Container - similar to Results.jsx overallScoreContainer */
+.subscriptionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border: 2px solid var(--border-black);
+  background-color: var(--background-white);
+  position: relative;
+}
+
+.subscriptionContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 10px 10px 0;
+  border-style: solid;
+  border-color: transparent var(--border-black) transparent transparent;
+}
+
+.subscriptionLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-grey);
+  font-weight: var(--font-weight-medium);
+}
+
+.subscriptionValue {
+  font-size: var(--font-size-xl);
+  color: var(--text-black);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Trial Sticker */
+.trialSticker {
+  font-size: var(--font-size-xs);
+  background-color: #ffc107;
+  color: var(--text-black);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-black);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: var(--font-weight-bold);
+  border-radius: 2px;
+  position: relative;
+}
+
+.trialSticker::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 4px 4px 0;
+  border-style: solid;
+  border-color: transparent var(--text-black) transparent transparent;
+}
+
+.subscriptionDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+  align-items: center;
+}
+
+.subscriptionDetailItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--text-grey);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Error and Success Messages - Matching Home */
+.errorMessage {
+  background-color: var(--background-light);
+  border: 2px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.successMessage {
+  background-color: var(--color-focus-bg);
+  border: 2px solid var(--color-focus-border);
+  color: var(--text-black);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Setup Section - Matching Home */
+.setupSection {
+  background-color: var(--background-white);
+  border: 2px solid var(--border-black);
+  padding: var(--spacing-3xl);
+  margin-bottom: var(--spacing-4xl);
+  position: relative;
+}
+
+.setupSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 16px 16px 0;
+  border-style: solid;
+  border-color: transparent var(--border-black) transparent transparent;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+}
+
+.stepHeader {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stepNumber {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary, #007bff);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stepTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.stepSubtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-grey);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  max-width: 600px;
+}
+
+/* Form Fields */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base);
+  margin-bottom: var(--spacing-lg);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-black);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.input,
+.select {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--border-black);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  background-color: var(--background-white);
+  color: var(--text-black);
+  transition: border-color var(--transition-fast);
+  line-height: var(--line-height-base);
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--text-grey);
+  background-color: var(--color-focus-input-bg);
+}
+
+.input::placeholder {
+  color: var(--text-light-grey);
+}
+
+.inputDisabled {
+  background-color: var(--background-light);
+  color: var(--text-grey);
+  cursor: not-allowed;
+}
+
+.inputDisabled:focus {
+  border-color: var(--border-black);
+  background-color: var(--background-light);
+}
+
+.contactLink {
+  color: var(--color-primary, #007bff);
+  text-decoration: underline;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+.contactLink:hover {
+  color: var(--text-black);
+}
+
+.fieldHint {
+  font-size: var(--font-size-xs);
+  color: var(--text-light-grey);
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+  margin-top: var(--spacing-sm);
+}
+
+/* Gender Buttons */
+.genderButtons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.genderButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 2px solid var(--border-black);
+  background-color: var(--background-white);
+  color: var(--text-black);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.genderButton:hover {
+  background-color: var(--background-light);
+}
+
+.genderButtonActive {
+  background-color: var(--text-black);
+  color: var(--background-white);
+}
+
+/* Textarea */
+.textarea {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--border-black);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  background-color: var(--background-white);
+  color: var(--text-black);
+  transition: border-color var(--transition-fast);
+  line-height: var(--line-height-base);
+  resize: vertical;
+  min-height: 100px;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--text-grey);
+  background-color: var(--color-focus-input-bg);
+}
+
+.textarea::placeholder {
+  color: var(--text-light-grey);
+}
+
+/* Suggestion Buttons */
+.suggestionButtons {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.suggestionLabel {
+  font-size: var(--font-size-xs);
+  color: var(--text-grey);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.suggestionButton {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-light-grey);
+  background-color: var(--background-light);
+  color: var(--text-black);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  border-radius: 4px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.suggestionButton:hover {
+  background-color: var(--background-white);
+  border-color: var(--border-black);
+}
+
+.suggestionButton:active {
+  background-color: var(--color-focus-bg);
+}
+
+/* Save & Continue Button Container - styled like Home.jsx start button */
+.saveAndContinueContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--spacing-2xl);
+  position: relative;
+  overflow: visible;
+}
+
+.saveAndContinueLabel {
+  font-size: var(--font-size-xs);
+  color: var(--text-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.saveAndContinueButton {
+  padding: var(--spacing-base) var(--spacing-2xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  border: 2px solid var(--border-black);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-fast);
+  min-width: 140px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background-color: var(--text-black);
+  color: var(--background-white);
+}
+
+.saveAndContinueButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 8px 8px 0;
+  border-style: solid;
+  border-color: transparent var(--background-white) transparent transparent;
+  transition: all var(--transition-fast);
+}
+
+.saveAndContinueButton:hover:not(:disabled) {
+  background-color: var(--text-grey);
+  border-color: var(--text-grey);
+}
+
+.saveAndContinueButton:disabled {
+  background-color: var(--background-light);
+  color: var(--text-light-grey);
+  border-color: var(--border-light-grey);
+  cursor: not-allowed;
+}
+
+.saveAndContinueButton:disabled::before {
+  display: none;
+}
+
+/* Footer */
+.footer {
+  margin-top: var(--spacing-4xl);
+  text-align: center;
+}
+
+.footerText {
+  font-size: var(--font-size-sm);
+  color: var(--text-grey);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.loadingMessage {
+  text-align: center;
+  font-size: var(--font-size-lg);
+  color: var(--text-grey);
+  padding: var(--spacing-4xl);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsive Design - Matching Home */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-base) var(--spacing-xs);
+  }
+
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+  }
+
+  .subscriptionContainer {
+    align-self: stretch;
+    padding: var(--spacing-base) var(--spacing-lg);
+  }
+
+  .subscriptionValue {
+    font-size: var(--font-size-lg);
+  }
+
+  .subscriptionDetails {
+    flex-direction: row;
+    gap: var(--spacing-base);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .headerSubtitle {
+    font-size: var(--font-size-sm);
+  }
+
+  .setupSection {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  .form {
+    border: none;
+    padding: 0;
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .saveAndContinueContainer {
+    align-self: center;
+  }
+
+  .saveAndContinueButton {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-base);
+    min-width: 140px;
+  }
+
+  .subscriptionItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .setupSection {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .form {
+    border: none;
+    padding: 0;
+  }
+
+  .title {
+    font-size: var(--font-size-lg);
+  }
+
+  .headerSubtitle {
+    font-size: var(--font-size-xs);
+  }
+
+  .stepTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .input,
+  .select {
+    padding: var(--spacing-sm) var(--spacing-base);
+    font-size: var(--font-size-sm);
+  }
+}

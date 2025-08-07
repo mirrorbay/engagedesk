@@ -1,0 +1,228 @@
+.commentsSection {
+  margin-top: var(--spacing-lg);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.addCommentButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.addCommentButton:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+.addCommentButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.title svg {
+  color: var(--primary-color);
+}
+
+.commentsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.comment {
+  padding: var(--spacing-sm);
+  border-left: 3px solid var(--primary-color);
+  background-color: var(--bg-primary);
+}
+
+.commentMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.authorName {
+  font-size: var(--font-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.timestamp {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.commentActions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton:hover {
+  color: var(--text-primary);
+}
+
+.commentContent {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-top: var(--spacing-xs);
+}
+
+.editForm {
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background-color: var(--bg-secondary);
+  border-left: 2px solid var(--primary-color);
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  text-align: center;
+}
+
+.emptyState svg {
+  opacity: 0.5;
+}
+
+.addCommentSection {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-light);
+}
+
+.formActions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.cancelButton {
+  background: none;
+  color: var(--text-secondary);
+  border: none;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .commentsList {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .commentMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+
+  .commentActions {
+    align-self: flex-start;
+  }
+
+  .addCommentForm,
+  .editForm {
+    padding: var(--spacing-xs);
+  }
+
+  .authorInfo {
+    flex-wrap: wrap;
+  }
+
+  .avatar {
+    width: 18px;
+    height: 18px;
+  }
+}

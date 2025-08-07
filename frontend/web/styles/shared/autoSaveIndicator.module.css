@@ -1,0 +1,158 @@
+.autoSaveIndicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(8px);
+  border: 1px solid transparent;
+  z-index: 1000;
+}
+
+/* Position variants */
+.top-right {
+  position: fixed;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+}
+
+.top-left {
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+}
+
+.bottom-left {
+  position: fixed;
+  bottom: var(--spacing-md);
+  left: var(--spacing-md);
+}
+
+.inline {
+  position: relative;
+}
+
+/* Status variants */
+.saving {
+  background-color: rgba(66, 133, 244, 0.1);
+  border-color: rgba(66, 133, 244, 0.2);
+  color: var(--primary-color);
+}
+
+.saved {
+  background-color: rgba(52, 168, 83, 0.1);
+  border-color: rgba(52, 168, 83, 0.2);
+  color: var(--accent-color);
+}
+
+/* Icon styles */
+.icon {
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text styles */
+.text {
+  white-space: nowrap;
+  font-size: var(--font-sm);
+  line-height: 1.25rem;
+  min-width: 60px;
+  text-align: left;
+}
+
+/* Hover effects */
+.autoSaveIndicator:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Animation for state changes */
+.autoSaveIndicator {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Compact variant */
+.compact {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-xs);
+}
+
+.compact .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.compact .text {
+  font-size: var(--font-xs);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .autoSaveIndicator {
+    padding: 0.375rem var(--spacing-sm);
+    font-size: 0.8125rem;
+  }
+
+  .text {
+    font-size: 0.8125rem;
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Adjust positioning for mobile */
+  .top-right,
+  .top-left {
+    top: var(--spacing-sm);
+  }
+
+  .bottom-right,
+  .bottom-left {
+    bottom: var(--spacing-sm);
+  }
+
+  .top-right,
+  .bottom-right {
+    right: var(--spacing-sm);
+  }
+
+  .top-left,
+  .bottom-left {
+    left: var(--spacing-sm);
+  }
+}

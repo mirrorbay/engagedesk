@@ -1,0 +1,571 @@
+/* Homepage - Professional Service Platform Design */
+.homepage {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 120px 0 100px 0;
+  border-bottom: 1px solid #e1e5e9;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse 1200px 400px at center top,
+    rgba(0, 120, 212, 0.03) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.heroContent {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-xl) 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: var(--font-xl);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-2xl) 0;
+  line-height: 1.4;
+  font-weight: var(--font-normal);
+}
+
+.heroMeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: 0 0 var(--spacing-2xl) 0;
+  font-size: var(--font-base);
+  color: #605e5c;
+  background: #ffffff;
+  border: 1px solid #d2d0ce;
+  border-radius: 20px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  display: inline-flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metaItem {
+  font-weight: var(--font-medium);
+  color: #323130;
+}
+
+.metaDivider {
+  color: #a19f9d;
+}
+
+.heroForm {
+  display: flex;
+  max-width: 420px;
+  margin: 0 auto;
+  gap: var(--spacing-sm);
+}
+
+.emailInput {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 1px solid #d2d0ce;
+  border-radius: 2px;
+  font-size: var(--font-base);
+  background: #ffffff;
+  color: #323130;
+  transition: var(--transition-normal);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 1px #0078d4;
+}
+
+.emailInput::placeholder {
+  color: var(--text-muted);
+}
+
+.ctaButton {
+  background: #0078d4;
+  color: #ffffff;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: 2px;
+  font-weight: var(--font-semibold);
+  font-size: var(--font-base);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: var(--transition-normal);
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ctaButton:hover {
+  background: #106ebe;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ctaButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0078d4;
+}
+
+.ctaButton:active {
+  background: #005a9e;
+}
+
+.heroLinks {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.demoLink {
+  background: none;
+  border: none;
+  color: #0078d4;
+  font-size: var(--font-base);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: var(--transition-normal);
+  padding: var(--spacing-sm);
+}
+
+.demoLink:hover {
+  color: #106ebe;
+  text-decoration: none;
+}
+
+.demoLink:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0078d4;
+  border-radius: 2px;
+}
+
+/* Features Section */
+.features {
+  padding: 100px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e1e5e9;
+  position: relative;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: var(--font-3xl);
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-2xl) 0;
+  line-height: 1.2;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-2xl);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  background: #ffffff;
+  border: 1px solid #d2d0ce;
+  border-radius: 2px;
+  padding: var(--spacing-xl);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  transition: var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.featureCard:hover {
+  border-color: #0078d4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #0078d4;
+  color: #ffffff;
+  border-radius: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-normal);
+}
+
+.featureCard:hover .featureIcon {
+  background: #106ebe;
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTitle {
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.featureDescription {
+  font-size: var(--font-base);
+  color: #605e5c;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Benefits Section */
+.benefits {
+  padding: 100px 0;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  position: relative;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-2xl);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.benefitCard {
+  text-align: center;
+  padding: var(--spacing-xl);
+  border-radius: 2px;
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.benefitCard:hover {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.benefitIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #0078d4;
+  color: #ffffff;
+  border-radius: 2px;
+  margin: 0 auto var(--spacing-lg) auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-normal);
+}
+
+.benefitCard:hover .benefitIcon {
+  background: #106ebe;
+  transform: scale(1.05);
+}
+
+.benefitTitle {
+  font-size: var(--font-xl);
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.benefitDescription {
+  font-size: var(--font-base);
+  color: #605e5c;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 100px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e1e5e9;
+  position: relative;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonialCard {
+  background: #ffffff;
+  border: 1px solid #d2d0ce;
+  border-radius: 2px;
+  padding: var(--spacing-xl);
+  transition: var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.testimonialCard:hover {
+  border-color: #0078d4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.testimonialRating {
+  display: flex;
+  gap: 2px;
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+.starIcon {
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.testimonialQuote {
+  font-size: var(--font-base);
+  color: #323130;
+  margin: 0 0 var(--spacing-lg) 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.testimonialAuthor {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.authorInfo {
+  flex: 1;
+}
+
+.authorName {
+  font-size: var(--font-base);
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.authorRole {
+  font-size: var(--font-sm);
+  color: #605e5c;
+  margin: 0;
+}
+
+/* Final CTA Section */
+.finalCta {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  text-align: center;
+  position: relative;
+}
+
+.finalCta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse 1200px 400px at center,
+    rgba(0, 120, 212, 0.02) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaTitle {
+  font-size: var(--font-3xl);
+  font-weight: var(--font-semibold);
+  color: #323130;
+  margin: 0 0 var(--spacing-lg) 0;
+  line-height: 1.2;
+}
+
+.ctaDescription {
+  font-size: var(--font-lg);
+  color: #605e5c;
+  margin: 0 0 var(--spacing-2xl) 0;
+  line-height: 1.5;
+}
+
+.finalCtaButton {
+  background: #0078d4;
+  color: #ffffff;
+  border: none;
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  border-radius: 2px;
+  font-weight: var(--font-semibold);
+  font-size: var(--font-lg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.finalCtaButton:hover {
+  background: #106ebe;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.finalCtaButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0078d4;
+}
+
+.finalCtaButton:active {
+  background: #005a9e;
+}
+
+.ctaActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Mobile Responsiveness - 768px threshold */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero {
+    padding: 60px 0 50px 0;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: var(--font-lg);
+  }
+
+  .heroForm {
+    flex-direction: column;
+    max-width: 320px;
+  }
+
+  .heroMeta {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .metaDivider {
+    display: none;
+  }
+
+  .sectionTitle {
+    font-size: var(--font-xl);
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .features,
+  .benefits,
+  .testimonials,
+  .finalCta {
+    padding: 60px 0;
+  }
+
+  .featureCard {
+    padding: var(--spacing-md);
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-md);
+  }
+
+  .benefitCard {
+    padding: var(--spacing-md);
+  }
+
+  .testimonialCard {
+    padding: var(--spacing-md);
+  }
+
+  .ctaTitle {
+    font-size: var(--font-xl);
+  }
+
+  .ctaDescription {
+    font-size: var(--font-base);
+  }
+
+  .finalCtaButton {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-base);
+  }
+
+  .benefitIcon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .featureIcon {
+    width: 40px;
+    height: 40px;
+  }
+}

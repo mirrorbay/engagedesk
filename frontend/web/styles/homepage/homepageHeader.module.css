@@ -1,0 +1,103 @@
+.header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo h1 {
+  color: #323130;
+  font-size: var(--font-xl);
+  font-weight: var(--font-semibold);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.demoButton {
+  background: #16a085;
+  color: #ffffff;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 2px;
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.demoButton:hover {
+  background: #138d75;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.demoButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #16a085;
+}
+
+.loginButton {
+  background: #0078d4;
+  color: #ffffff;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 2px;
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.loginButton:hover {
+  background: #106ebe;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loginButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #0078d4;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 0 var(--spacing-md);
+  }
+
+  .logo h1 {
+    font-size: var(--font-lg);
+  }
+}

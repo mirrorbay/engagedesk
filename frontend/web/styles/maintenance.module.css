@@ -1,0 +1,139 @@
+.maintenanceContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.maintenanceCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.errorCode {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 16px;
+}
+
+.maintenanceHeader h1 {
+  color: #1a202c;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.maintenanceHeader p {
+  color: #718096;
+  font-size: 16px;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+.maintenanceContent {
+  margin: 32px 0;
+}
+
+.messageContainer h2 {
+  color: #2d3748;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.messageContainer p {
+  color: #718096;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.maintenanceFooter {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.maintenanceFooter p {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.supportLink {
+  color: #667eea;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.supportLink:hover {
+  color: #5a67d8;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.homeButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.homeButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  text-decoration: none;
+  color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .maintenanceContainer {
+    padding: 16px;
+  }
+
+  .maintenanceCard {
+    padding: 24px;
+  }
+
+  .errorCode {
+    font-size: 2.5rem;
+  }
+
+  .maintenanceHeader h1 {
+    font-size: 24px;
+  }
+
+  .messageContainer h2 {
+    font-size: 18px;
+  }
+}

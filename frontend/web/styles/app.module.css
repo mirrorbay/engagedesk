@@ -1,0 +1,112 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  padding: var(--spacing-xl) 0 80px 0; /* Bottom padding to account for sticky nav */
+  background-color: var(--bg-secondary);
+}
+
+/* Bottom Navigation */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  padding: var(--spacing-sm) 0;
+}
+
+.navTabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.navTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: var(--transition-normal);
+  flex: 1;
+  position: relative;
+}
+
+.navTab:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.navTab.active {
+  color: var(--primary-color);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-lg);
+}
+
+.navTab.active::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--spacing-sm));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.tabIcon {
+  margin-bottom: var(--spacing-xs);
+  line-height: 1;
+}
+
+.tabLabel {
+  font-size: var(--font-xs);
+  font-weight: var(--font-medium);
+  line-height: 1;
+  text-align: center;
+}
+
+/* Loading Styles */
+.loadingContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+}
+
+.loadingSpinner {
+  color: var(--text-secondary);
+  font-size: var(--font-lg);
+  font-weight: var(--font-medium);
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    padding: var(--spacing-md) 0 80px 0;
+  }
+
+  .navTab {
+    padding: var(--spacing-xs);
+  }
+
+  .tabLabel {
+    font-size: 11px;
+  }
+}

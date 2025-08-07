@@ -1,0 +1,111 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap");
+
+/* Global CSS Variables and Constants - Google Cloud Inspired */
+:root {
+  /* Google Cloud Colors */
+  --primary-color: #4285f4;
+  --primary-hover: #3367d6;
+  --secondary-color: #5f6368;
+  --accent-color: #34a853;
+  --danger-color: #ea4335;
+  --warning-color: #fbbc04;
+
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  --bg-dark: #202124;
+  --bg-surface: #ffffff;
+
+  /* Text Colors */
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-muted: #9aa0a6;
+  --text-tertiary: #9ca3af;
+  --text-white: #ffffff;
+
+  /* Border Colors */
+  --border-light: #e8eaed;
+  --border-medium: #dadce0;
+  --border-dark: #5f6368;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Font Sizes */
+  --font-xs: 0.9rem;
+  --font-sm: 1rem;
+  --font-base: 1.2rem;
+  --font-lg: 1.3rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.7rem;
+  --font-3xl: 1.9rem;
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* Global Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Global Input Placeholder Styling */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* Common Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}

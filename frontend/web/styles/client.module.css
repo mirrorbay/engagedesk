@@ -1,0 +1,122 @@
+.clientPage {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.clientListRow {
+  width: 100%;
+}
+
+.clientDetailsRow {
+  width: 100%;
+}
+
+.clientList {
+  min-height: 400px;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Client Details Section Styles */
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.clientHeader h3 {
+  font-size: var(--font-xl);
+  font-weight: var(--font-semibold);
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+}
+
+.clientHeader .email {
+  font-size: var(--font-lg);
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.companySection,
+.addressSection,
+.phoneSection,
+.interestsSection,
+.preferencesSection {
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.companySection h4,
+.addressSection h4,
+.phoneSection h4,
+.interestsSection h4,
+.preferencesSection h4 {
+  font-size: var(--font-lg);
+  font-weight: var(--font-medium);
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+}
+
+.companySection p,
+.addressSection p,
+.phoneSection p {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--text-secondary);
+}
+
+.phoneSection a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.phoneSection a:hover {
+  text-decoration: underline;
+}
+
+.tags {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary-color);
+  color: var(--text-white);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-light);
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}

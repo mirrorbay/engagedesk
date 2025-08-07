@@ -1,0 +1,138 @@
+/* Simple styling for invention disclosure display */
+.inventionContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: white;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #333;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.confidential {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.sectionNumber {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.sectionContent {
+  margin-left: 20px;
+}
+
+.subsection {
+  margin-bottom: 15px;
+}
+
+.subsectionLabel {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.answer {
+  margin-left: 10px;
+  text-align: justify;
+}
+
+.highlight {
+  background-color: #ffcccc;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.diagram {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.agentBox {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #333;
+  background-color: white;
+  min-width: 120px;
+  text-align: center;
+}
+
+.arrow {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.definitionList {
+  margin-left: 20px;
+}
+
+.definition {
+  margin-bottom: 10px;
+}
+
+.definitionTerm {
+  font-weight: bold;
+  color: #333;
+}
+
+.definitionText {
+  margin-left: 15px;
+}
+
+.signature {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.signatureBlock {
+  margin-bottom: 20px;
+}
+
+.signatureLine {
+  border-bottom: 1px solid #333;
+  width: 300px;
+  height: 20px;
+  display: inline-block;
+  margin-left: 10px;
+}

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert Logo to PNG</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            text-align: center;
+        }
+        #canvas { 
+            border: 1px solid #ccc; 
+            margin: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>DaVinci Focus Logo Converter</h1>
+    <p>This will create a 120x120 PNG version of your logo for Google OAuth.</p>
+    
+    <canvas id="canvas" width="120" height="120"></canvas>
+    
+    <br>
+    <button onclick="drawLogo()">Draw Logo</button>
+    <button onclick="downloadPNG()">Download PNG</button>
+    
+    <script>
+        function drawLogo() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Fill with black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 120, 120);
+            
+            // Draw white checkmark
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Scale coordinates from 100x100 to 120x120
+            const scale = 120/100;
+            
+            ctx.beginPath();
+            // M20 50 L40 70 L80 30
+            ctx.moveTo(20 * scale, 50 * scale);
+            ctx.lineTo(40 * scale, 70 * scale);
+            ctx.lineTo(80 * scale, 30 * scale);
+            ctx.stroke();
+        }
+        
+        function downloadPNG() {
+            const canvas = document.getElementById('canvas');
+            const link = document.createElement('a');
+            link.download = 'logo-120x120.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Auto-draw on load
+        window.onload = function() {
+            drawLogo();
+        };
+    </script>
+</body>
+</html>

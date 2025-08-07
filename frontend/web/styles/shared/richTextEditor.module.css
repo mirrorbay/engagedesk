@@ -1,0 +1,265 @@
+.richTextEditor {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.toolbarButton:hover {
+  background: var(--bg-tertiary);
+}
+
+.toolbarButton:active {
+  background: var(--border-light);
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background: var(--border-medium);
+  margin: 0 var(--spacing-xs);
+}
+
+.formatSelect {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.formatSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.editor {
+  min-height: 200px;
+  padding: var(--spacing-md);
+  font-family: inherit;
+  font-size: var(--font-sm);
+  line-height: 1.5;
+  color: var(--text-primary);
+  outline: none;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.editor:empty:before {
+  content: attr(data-placeholder);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.editor:focus {
+  background: var(--bg-primary);
+}
+
+/* Rich text content styling */
+.editor h1 {
+  font-size: var(--font-2xl);
+  font-weight: var(--font-bold);
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+}
+
+.editor h2 {
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+}
+
+.editor h3 {
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+}
+
+.editor h4 {
+  font-size: var(--font-base);
+  font-weight: var(--font-semibold);
+  margin: var(--spacing-sm) 0 var(--spacing-xs) 0;
+}
+
+.editor p {
+  margin: var(--spacing-sm) 0;
+}
+
+.editor ul,
+.editor ol {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.editor li {
+  margin: var(--spacing-xs) 0;
+}
+
+.editor a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.editor a:hover {
+  color: var(--primary-hover);
+}
+
+.editor strong,
+.editor b {
+  font-weight: var(--font-bold);
+}
+
+.editor em,
+.editor i {
+  font-style: italic;
+}
+
+.editor u {
+  text-decoration: underline;
+}
+
+/* Link modal styles */
+.linkModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.linkModalContent {
+  background: var(--bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 400px;
+  margin: var(--spacing-md);
+}
+
+.linkModalContent h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.linkInputGroup {
+  margin-bottom: var(--spacing-md);
+}
+
+.linkInputGroup label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+}
+
+.linkInputGroup input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.linkInputGroup input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.linkModalActions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+  margin-top: var(--spacing-lg);
+}
+
+.cancelButton {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-light);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  transition: all var(--transition-fast);
+}
+
+.cancelButton:hover {
+  background: var(--bg-tertiary);
+}
+
+.insertButton {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: var(--primary-color);
+  color: var(--text-white);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  transition: all var(--transition-fast);
+}
+
+.insertButton:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.insertButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .toolbarButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .editor {
+    padding: var(--spacing-md);
+    min-height: 150px;
+  }
+
+  .linkModalContent {
+    margin: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+}

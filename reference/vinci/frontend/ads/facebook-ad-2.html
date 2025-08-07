@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaVinci Focus - Facebook Ad 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .ad-container {
+            width: 600px;
+            height: 600px;
+            position: relative;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            color: white;
+        }
+        
+        /* Logo positioned at top left */
+        .logo-section {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 3;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #000000;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            font-family: "Montserrat", sans-serif;
+            letter-spacing: -0.5px;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .headline {
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .subheadline {
+            font-size: 18px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Side by side layout for photo and text */
+        .photo-text-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .child-photo {
+            width: 200px;
+            height: 150px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+            position: relative;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .child-photo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .child-photo:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        
+        .text-content {
+            flex: 1;
+            text-align: left;
+            max-width: 300px;
+            padding-left: 10px;
+        }
+        
+        .solution-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #FFD700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+        
+        .how-it-works {
+            font-size: 16px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.4;
+        }
+        
+        /* Side by side stats for better space usage */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            margin-bottom: 25px;
+        }
+        
+        .stat {
+            text-align: center;
+            flex: 0 0 auto;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: white;
+            margin-top: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+        
+        .bottom-section {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+            margin-bottom: 15px;
+            width: 100%;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.5);
+        }
+        
+        .guarantee {
+            font-size: 16px;
+            color: #FFD700;
+            font-weight: 500;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Background overlay for better text contrast */
+        .ad-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <!-- Logo positioned at top left like header.jsx -->
+        <div class="logo-section">
+            <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#000000" />
+                    <path d="M20 50 L40 70 L80 30" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <div class="logo-text">DaVinci Focus</div>
+        </div>
+        
+        <div class="main-content">
+            <h1 class="headline">Can't Focus = Poor Grades?</h1>
+            <p class="subheadline">For kids (ages 7-15) with attention struggles in school</p>
+            
+            <!-- Photo and text side by side for better space usage -->
+            <div class="photo-text-section">
+                <img src="../public/1.png" alt="Happy child doing homework successfully" class="child-photo">
+                <div class="text-content">
+                    <div class="solution-text">Proven math training that fixes focus AND grade problems</div>
+                    <div class="how-it-works">12 minutes daily practice + parent progress reports</div>
+                </div>
+            </div>
+            
+            <!-- 87% and 5000+ side by side for better space usage -->
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">improve focus & grades<br>in 3-5 weeks</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">families<br>trust us</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-section">
+            <button class="cta-button">Start Seeing Results - Try Free</button>
+            <p class="guarantee">Money back guarantee</p>
+        </div>
+    </div>
+</body>
+</html>
