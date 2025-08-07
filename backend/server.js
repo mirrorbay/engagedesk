@@ -46,6 +46,37 @@ app.get("/api/health", (req, res) => {
   res.json({ message: "Server is running" });
 });
 
+// Warm endpoint for UptimeRobot to keep backend and database active
+app.get("/api/warm", async (req, res) => {
+  try {
+    // Perform a lightweight database operation to keep connection active
+    const Client = require("./models/Client");
+    const clientCount = await Client.countDocuments();
+
+    // Get database connection status
+    const dbStatus =
+      mongoose.connection.readyState === 1 ? "connected" : "disconnected";
+
+    res.json({
+      message: "Backend and database are warm",
+      timestamp: new Date().toISOString(),
+      database: {
+        status: dbStatus,
+        clientCount: clientCount,
+      },
+      uptime: process.uptime(),
+    });
+  } catch (error) {
+    console.error("Warm endpoint error:", error);
+    res.status(500).json({
+      message: "Warm endpoint error",
+      timestamp: new Date().toISOString(),
+      error: error.message,
+      uptime: process.uptime(),
+    });
+  }
+});
+
 // API routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/analytics", require("./routes/analytics"));
