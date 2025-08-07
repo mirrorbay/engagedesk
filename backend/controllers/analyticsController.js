@@ -1,4 +1,5 @@
 const Analytics = require("../models/Analytics");
+const Team = require("../models/Team");
 const { isLocalOrPrivateIP } = require("../utils/ipExclusion");
 const { getIPLocation } = require("../utils/geolocation");
 
@@ -148,6 +149,85 @@ const trackClickEvents = async (req, res) => {
     success: true,
     message: "Click events tracked successfully",
   });
+};
+
+// Track visit duration
+const trackVisitDuration = async (req, res) => {
+  try {
+    const { page_path, visit_duration, session_id } = req.body;
+
+    const ip_address = getClientIP(req);
+    const user_id = null;
+
+    // Find the most recent analytics record for this session
+    const analyticsRecord = await Analytics.findOne({
+      ip_address,
+      page_path,
+      user_id,
+    }).sort({ visit_timestamp: -1 });
+
+    if (analyticsRecord) {
+      analyticsRecord.visit_duration = visit_duration;
+      analyticsRecord.session_end_timestamp = new Date();
+      await analyticsRecord.save();
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Visit duration tracked successfully",
+    });
+  } catch (error) {
+    console.warn("Error tracking visit duration:", error);
+    res.status(200).json({
+      success: true,
+      message: "Visit duration tracking completed",
+    });
+  }
+};
+
+// Track scroll events (for homepage)
+const trackScrollEvents = async (req, res) => {
+  try {
+    const { page_path, scroll_events, max_scroll_depth } = req.body;
+
+    const ip_address = getClientIP(req);
+    const user_id = null;
+
+    // Find the most recent analytics record for this session
+    const analyticsRecord = await Analytics.findOne({
+      ip_address,
+      page_path,
+      user_id,
+    }).sort({ visit_timestamp: -1 });
+
+    if (analyticsRecord) {
+      // Add new scroll events
+      if (scroll_events && scroll_events.length > 0) {
+        analyticsRecord.scroll_events.push(...scroll_events);
+      }
+
+      // Update max scroll depth if provided and greater than current
+      if (
+        max_scroll_depth !== undefined &&
+        max_scroll_depth > analyticsRecord.max_scroll_depth
+      ) {
+        analyticsRecord.max_scroll_depth = max_scroll_depth;
+      }
+
+      await analyticsRecord.save();
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Scroll events tracked successfully",
+    });
+  } catch (error) {
+    console.warn("Error tracking scroll events:", error);
+    res.status(200).json({
+      success: true,
+      message: "Scroll tracking completed",
+    });
+  }
 };
 
 // Get analytics data
@@ -394,11 +474,35 @@ const getDailyAnalyticsChart = async (req, res) => {
   });
 };
 
+// Get all users from Team model
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await Team.find({ status: "active" })
+      .populate("manager", "firstName lastName email")
+      .sort({ firstName: 1, lastName: 1 })
+      .lean();
+
+    res.status(200).json({
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+
 module.exports = {
   trackPageVisit,
   trackClickEvents,
+  trackVisitDuration,
+  trackScrollEvents,
   getAnalyticsData,
   getAnalyticsSummary,
   getReferralSourceBreakdown,
   getDailyAnalyticsChart,
+  getAllUsers,
 };

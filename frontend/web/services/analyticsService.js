@@ -44,6 +44,44 @@ export const trackClickEvents = async (clickData) => {
   }
 };
 
+// Track visit duration
+export const trackVisitDuration = async (durationData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics/visit-duration`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(durationData),
+    });
+
+    if (!response.ok) {
+      console.warn("Failed to track visit duration:", response.statusText);
+    }
+  } catch (error) {
+    console.warn("Error tracking visit duration:", error);
+  }
+};
+
+// Track scroll events
+export const trackScrollEvents = async (scrollData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics/scroll-events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(scrollData),
+    });
+
+    if (!response.ok) {
+      console.warn("Failed to track scroll events:", response.statusText);
+    }
+  } catch (error) {
+    console.warn("Error tracking scroll events:", error);
+  }
+};
+
 // Get analytics data
 export const getAnalyticsData = async (params = {}) => {
   try {
@@ -75,6 +113,27 @@ export const getAnalyticsData = async (params = {}) => {
     return await response.json();
   } catch (error) {
     console.error("Error fetching analytics data:", error);
+    throw error;
+  }
+};
+
+// Get all users
+export const getAllUsers = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics/users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch users");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching users:", error);
     throw error;
   }
 };

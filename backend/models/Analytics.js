@@ -80,6 +80,42 @@ const analyticsSchema = new Schema(
       type: [clickEventSchema],
       default: [],
     },
+
+    // Visit duration tracking
+    visit_duration: {
+      type: Number, // Duration in milliseconds
+    },
+    session_end_timestamp: {
+      type: Date,
+    },
+
+    // Scroll tracking (for homepage)
+    scroll_events: {
+      type: [
+        {
+          scroll_depth: {
+            type: Number, // Percentage of page scrolled (0-100)
+            required: true,
+          },
+          scroll_timestamp: {
+            type: Date,
+            required: true,
+            default: Date.now,
+          },
+          viewport_height: {
+            type: Number, // Browser viewport height
+          },
+          document_height: {
+            type: Number, // Total document height
+          },
+        },
+      ],
+      default: [],
+    },
+    max_scroll_depth: {
+      type: Number, // Maximum scroll depth reached (0-100)
+      default: 0,
+    },
   },
   {
     timestamps: true,

@@ -4,6 +4,7 @@ import {
   getAnalyticsSummary,
   getReferralSourceBreakdown,
   getDailyAnalyticsChart,
+  getAllUsers,
 } from "../services/analyticsService";
 import styles from "../styles/analytics.module.css";
 
@@ -12,8 +13,11 @@ function Analytics() {
   const [summaryData, setSummaryData] = useState([]);
   const [referralBreakdown, setReferralBreakdown] = useState([]);
   const [dailyChartData, setDailyChartData] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
   const [error, setError] = useState("");
+  const [usersError, setUsersError] = useState("");
   const [filters, setFilters] = useState({
     days: 7,
     page_path: "",
@@ -49,8 +53,24 @@ function Analytics() {
     }
   };
 
+  const loadUsers = async () => {
+    try {
+      setUsersLoading(true);
+      setUsersError("");
+
+      const response = await getAllUsers();
+      setUsers(response.data || []);
+    } catch (err) {
+      console.error("Failed to load users:", err);
+      setUsersError("Failed to load users");
+    } finally {
+      setUsersLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadAnalyticsData();
+    loadUsers();
   }, [filters]);
 
   const handleFilterChange = (key, value) => {
@@ -72,6 +92,22 @@ function Analytics() {
       second: "2-digit",
       hour12: false,
     });
+  };
+
+  const formatDuration = (milliseconds) => {
+    if (!milliseconds || milliseconds < 0) return "N/A";
+
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    if (hours > 0) {
+      return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+    } else if (minutes > 0) {
+      return `${minutes}m ${seconds % 60}s`;
+    } else {
+      return `${seconds}s`;
+    }
   };
 
   const getReferralSourceColor = (source) => {
@@ -181,6 +217,59 @@ function Analytics() {
     );
   };
 
+  const renderScrollEvents = (scrollEvents, maxScrollDepth) => {
+    if (!scrollEvents || scrollEvents.length === 0) {
+      return maxScrollDepth > 0 ? (
+        <div className={styles.scrollInfo}>
+          <div className={styles.maxScrollDepth}>Max: {maxScrollDepth}%</div>
+        </div>
+      ) : (
+        "No scroll data"
+      );
+    }
+
+    return (
+      <div className={styles.scrollEventsList}>
+        <div className={styles.maxScrollDepth}>
+          Max Depth: {maxScrollDepth}%
+        </div>
+        <div className={styles.scrollEventsCount}>
+          {scrollEvents.length} scroll events
+        </div>
+        <div className={styles.scrollEventsDetails}>
+          {scrollEvents.slice(0, 3).map((event, index) => (
+            <div key={index} className={styles.scrollEvent}>
+              <span className={styles.scrollDepth}>{event.scroll_depth}%</span>
+              <span className={styles.scrollTime}>
+                {formatTimestamp(event.scroll_timestamp)}
+              </span>
+            </div>
+          ))}
+          {scrollEvents.length > 3 && (
+            <div className={styles.scrollEventsMore}>
+              +{scrollEvents.length - 3} more
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderVisitDuration = (visitDuration, sessionEndTimestamp) => {
+    if (!visitDuration) return "N/A";
+
+    return (
+      <div className={styles.visitDurationInfo}>
+        <div className={styles.duration}>{formatDuration(visitDuration)}</div>
+        {sessionEndTimestamp && (
+          <div className={styles.sessionEnd}>
+            Ended: {formatTimestamp(sessionEndTimestamp)}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   if (error) {
     return (
       <div className={styles.container}>
@@ -259,6 +348,172 @@ function Analytics() {
             <span className={styles.toggleText}>Exclude Local IPs</span>
           </label>
         </div>
+      </div>
+
+      {/* Team Users Section */}
+      <div className={styles.usersSection}>
+        <div className={styles.usersSectionHeader}>
+          <h2>Team Members ({users.length})</h2>
+          <button
+            onClick={loadUsers}
+            disabled={usersLoading}
+            className={styles.refreshButton}
+          >
+            {usersLoading ? "Loading..." : "Refresh Users"}
+          </button>
+        </div>
+
+        {usersError && (
+          <div className={styles.usersError}>
+            <p>{usersError}</p>
+            <button onClick={loadUsers} className={styles.retryButton}>
+              Retry
+            </button>
+          </div>
+        )}
+
+        {users.length > 0 && (
+          <div className={styles.usersGrid}>
+            {users.map((user) => (
+              <div key={user._id} className={styles.userCard}>
+                <div className={styles.userHeader}>
+                  <div className={styles.userAvatar}>
+                    {user.icon ? (
+                      <img
+                        src={user.icon}
+                        alt={`${user.firstName} ${user.lastName}`}
+                      />
+                    ) : (
+                      <div className={styles.userInitials}>
+                        {(user.firstName?.[0] || "").toUpperCase()}
+                        {(user.lastName?.[0] || "").toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  <div className={styles.userBasicInfo}>
+                    <div className={styles.userName}>
+                      {user.title && (
+                        <span className={styles.userTitle}>{user.title} </span>
+                      )}
+                      {user.firstName} {user.lastName}
+                      {user.nickname && (
+                        <span className={styles.userNickname}>
+                          {" "}
+                          ({user.nickname})
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.userEmail}>{user.email}</div>
+                    {user.position && (
+                      <div className={styles.userPosition}>{user.position}</div>
+                    )}
+                    {user.department && (
+                      <div className={styles.userDepartment}>
+                        {user.department}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.userDetails}>
+                  {user.gender && (
+                    <div className={styles.userDetailItem}>
+                      <span className={styles.userDetailLabel}>Gender:</span>
+                      <span className={styles.userDetailValue}>
+                        {user.gender}
+                      </span>
+                    </div>
+                  )}
+
+                  {user.phones && user.phones.length > 0 && (
+                    <div className={styles.userDetailItem}>
+                      <span className={styles.userDetailLabel}>Phone:</span>
+                      <div className={styles.userPhones}>
+                        {user.phones.map((phone, index) => (
+                          <div key={index} className={styles.userPhone}>
+                            <span className={styles.phoneNumber}>
+                              {phone.number}
+                            </span>
+                            {phone.label && (
+                              <span className={styles.phoneLabel}>
+                                ({phone.label})
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {user.manager && (
+                    <div className={styles.userDetailItem}>
+                      <span className={styles.userDetailLabel}>Manager:</span>
+                      <span className={styles.userDetailValue}>
+                        {user.manager.firstName} {user.manager.lastName}
+                      </span>
+                    </div>
+                  )}
+
+                  {user.emergencyContact &&
+                    (user.emergencyContact.name ||
+                      user.emergencyContact.phone) && (
+                      <div className={styles.userDetailItem}>
+                        <span className={styles.userDetailLabel}>
+                          Emergency Contact:
+                        </span>
+                        <div className={styles.emergencyContact}>
+                          {user.emergencyContact.name && (
+                            <div className={styles.emergencyName}>
+                              {user.emergencyContact.name}
+                              {user.emergencyContact.relationship && (
+                                <span className={styles.emergencyRelationship}>
+                                  ({user.emergencyContact.relationship})
+                                </span>
+                              )}
+                            </div>
+                          )}
+                          {user.emergencyContact.phone && (
+                            <div className={styles.emergencyPhone}>
+                              {user.emergencyContact.phone}
+                            </div>
+                          )}
+                          {user.emergencyContact.email && (
+                            <div className={styles.emergencyEmail}>
+                              {user.emergencyContact.email}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                  <div className={styles.userMeta}>
+                    <div className={styles.userStatus}>
+                      <span
+                        className={`${styles.statusBadge} ${
+                          styles[user.status]
+                        }`}
+                      >
+                        {user.status}
+                      </span>
+                    </div>
+                    <div className={styles.userDates}>
+                      <div className={styles.userCreated}>
+                        Created: {formatTimestamp(user.createdAt)}
+                      </div>
+                      <div className={styles.userUpdated}>
+                        Updated: {formatTimestamp(user.updatedAt)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {users.length === 0 && !usersLoading && !usersError && (
+          <p className={styles.noData}>No team members found</p>
+        )}
       </div>
 
       {/* Daily Analytics Charts */}
@@ -385,6 +640,8 @@ function Analytics() {
                 <th>Device Info</th>
                 <th>Page Path</th>
                 <th>Referrer</th>
+                <th>Visit Duration</th>
+                <th>Scroll Events</th>
                 <th>Click Events</th>
               </tr>
             </thead>
@@ -404,6 +661,18 @@ function Analytics() {
                   <td className={styles.pathCell}>{item.page_path}</td>
                   <td className={styles.referrerCell}>
                     {item.referrer || "Direct"}
+                  </td>
+                  <td className={styles.visitDurationCell}>
+                    {renderVisitDuration(
+                      item.visit_duration,
+                      item.session_end_timestamp
+                    )}
+                  </td>
+                  <td className={styles.scrollEventsCell}>
+                    {renderScrollEvents(
+                      item.scroll_events,
+                      item.max_scroll_depth
+                    )}
                   </td>
                   <td className={styles.clickEventsCell}>
                     {renderClickEvents(item.click_events)}

@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { trackPageVisit, trackClickEvents } from "../services/analyticsService";
+import {
+  trackPageVisit,
+  trackClickEvents,
+  trackVisitDuration,
+  trackScrollEvents,
+} from "../services/analyticsService";
 
 // Custom hook for analytics tracking
 export const useAnalytics = () => {
@@ -8,6 +13,10 @@ export const useAnalytics = () => {
   const pageStartTime = useRef(Date.now());
   const clickBuffer = useRef([]);
   const clickTimeoutRef = useRef(null);
+  const scrollBuffer = useRef([]);
+  const maxScrollDepth = useRef(0);
+  const lastScrollTime = useRef(Date.now());
+  const scrollTimeoutRef = useRef(null);
 
   // Track page visit on location change
   useEffect(() => {
@@ -18,22 +27,55 @@ export const useAnalytics = () => {
       };
 
       trackPageVisit(pageData);
+
+      // Reset tracking variables for new page
+      pageStartTime.current = Date.now();
+      maxScrollDepth.current = 0;
+      scrollBuffer.current = [];
     };
 
     handlePageVisit();
   }, [location.pathname]);
 
-  // Send any remaining click events on page unload
+  // Track visit duration and send data on page unload
   useEffect(() => {
     const handleBeforeUnload = () => {
+      // Calculate visit duration
+      const visitDuration = Date.now() - pageStartTime.current;
+
+      // Send visit duration
+      if (visitDuration > 1000) {
+        // Only track if stayed more than 1 second
+        trackVisitDuration({
+          page_path: location.pathname,
+          visit_duration: visitDuration,
+        });
+      }
+
       // Send any remaining click events
       if (clickBuffer.current.length > 0) {
         sendClickEvents();
       }
+
+      // Send any remaining scroll events
+      if (scrollBuffer.current.length > 0) {
+        sendScrollEvents();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        handleBeforeUnload();
+      }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [location.pathname]);
 
   // Function to send click events
@@ -48,6 +90,97 @@ export const useAnalytics = () => {
       clickBuffer.current = [];
     }
   };
+
+  // Function to send scroll events
+  const sendScrollEvents = () => {
+    if (scrollBuffer.current.length > 0) {
+      const scrollData = {
+        page_path: location.pathname,
+        scroll_events: [...scrollBuffer.current],
+        max_scroll_depth: maxScrollDepth.current,
+      };
+
+      trackScrollEvents(scrollData);
+      scrollBuffer.current = [];
+    }
+  };
+
+  // Track scroll events (only for homepage)
+  useEffect(() => {
+    // Only track scroll events on homepage
+    if (location.pathname !== "/") {
+      return;
+    }
+
+    const handleScroll = () => {
+      try {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight = Math.max(
+          document.body.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight,
+          document.documentElement.scrollHeight,
+          document.documentElement.offsetHeight
+        );
+        const viewportHeight = window.innerHeight;
+
+        // Calculate scroll depth percentage
+        const scrollDepth = Math.min(
+          Math.round(((scrollTop + viewportHeight) / documentHeight) * 100),
+          100
+        );
+
+        // Update max scroll depth
+        if (scrollDepth > maxScrollDepth.current) {
+          maxScrollDepth.current = scrollDepth;
+        }
+
+        // Throttle scroll events - only record significant scroll changes
+        const now = Date.now();
+        if (now - lastScrollTime.current > 1000) {
+          // Every 1 second max
+          const scrollEvent = {
+            scroll_depth: scrollDepth,
+            scroll_timestamp: new Date(),
+            viewport_height: viewportHeight,
+            document_height: documentHeight,
+          };
+
+          scrollBuffer.current.push(scrollEvent);
+          lastScrollTime.current = now;
+
+          // Send scroll events in batches
+          if (scrollBuffer.current.length >= 5) {
+            sendScrollEvents();
+          }
+        }
+
+        // Clear existing timeout and set new one
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+
+        // Send remaining scroll events after user stops scrolling
+        scrollTimeoutRef.current = setTimeout(() => {
+          if (scrollBuffer.current.length > 0) {
+            sendScrollEvents();
+          }
+        }, 2000);
+      } catch (error) {
+        // Silently handle any scroll tracking errors
+        console.warn("Scroll tracking error:", error);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [location.pathname]);
 
   // Track click events
   useEffect(() => {
