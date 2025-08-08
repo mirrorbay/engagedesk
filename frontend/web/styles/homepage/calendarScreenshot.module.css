@@ -1,0 +1,344 @@
+/* Calendar Screenshot Component */
+.mockupContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+
+.mockupWindow {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.mockupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.mockupControls {
+  display: flex;
+  gap: 8px;
+}
+
+.mockupControl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e1e5e9;
+}
+
+.mockupControl:first-child {
+  background: #ff5f57;
+}
+
+.mockupControl:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.mockupControl:nth-child(3) {
+  background: #28ca42;
+}
+
+.mockupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.mockupActions {
+  display: flex;
+  gap: 8px;
+}
+
+.mockupButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mockupButton:hover {
+  background: #106ebe;
+}
+
+.calendarView {
+  background: #ffffff;
+  padding: 16px;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendarHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 4px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.viewButton {
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #605e5c;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewButton.active {
+  background: #0078d4;
+  color: white;
+}
+
+.viewButton:hover:not(.active) {
+  background: #e1e5e9;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.calendarDay {
+  min-height: 100px;
+  background: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 8px;
+  position: relative;
+}
+
+.dayNumber {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+  margin-bottom: 4px;
+}
+
+.calendarEvent {
+  background: #0078d4;
+  color: white;
+  border-radius: 3px;
+  padding: 4px 6px;
+  margin-bottom: 2px;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.eventTime {
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+
+.eventTitle {
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.eventMeeting {
+  background: #0078d4;
+}
+
+.eventDeadline {
+  background: #d13438;
+}
+
+.eventFollowup {
+  background: #16a34a;
+}
+
+.actionsList {
+  background: #f8f9fa;
+  border-top: 1px solid #e1e5e9;
+  padding: 16px;
+}
+
+.actionsList h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e1e5e9;
+  font-size: 12px;
+}
+
+.actionItem:last-child {
+  border-bottom: none;
+}
+
+.actionItem svg {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.actionItem span:first-of-type {
+  flex: 1;
+  color: #323130;
+  line-height: 1.4;
+}
+
+.actionDue {
+  color: #d13438;
+  font-weight: 600;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .mockupContainer {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .mockupWindow {
+    border-radius: 8px;
+  }
+
+  .mockupHeader {
+    padding: 8px 12px;
+  }
+
+  .mockupTitle {
+    font-size: 12px;
+  }
+
+  .mockupActions {
+    gap: 4px;
+  }
+
+  .mockupButton {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .calendarView {
+    padding: 12px;
+  }
+
+  .calendarHeader h3 {
+    font-size: 16px;
+  }
+
+  .viewButton {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .calendarGrid {
+    gap: 4px;
+  }
+
+  .calendarDay {
+    min-height: 80px;
+    padding: 4px;
+  }
+
+  .dayNumber {
+    font-size: 12px;
+  }
+
+  .calendarEvent {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+
+  .actionsList {
+    padding: 12px;
+  }
+
+  .actionsList h4 {
+    font-size: 12px;
+  }
+
+  .actionItem {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .actionDue {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendarHeader {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .viewToggle {
+    justify-content: center;
+  }
+
+  .calendarGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calendarDay {
+    min-height: 60px;
+  }
+
+  .calendarEvent {
+    font-size: 8px;
+    padding: 1px 3px;
+  }
+
+  .eventTitle {
+    display: none;
+  }
+
+  .actionItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .actionDue {
+    align-self: flex-end;
+  }
+}

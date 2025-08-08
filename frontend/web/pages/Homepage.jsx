@@ -12,6 +12,9 @@ import {
 import { useAuth } from "../utils/AuthContext";
 import HomepageHeader from "../components/homepage/HomepageHeader";
 import HomepageFooter from "../components/homepage/HomepageFooter";
+import WorksheetScreenshot from "../components/homepage/WorksheetScreenshot";
+import EmailScreenshot from "../components/homepage/EmailScreenshot";
+import CalendarScreenshot from "../components/homepage/CalendarScreenshot";
 import styles from "../styles/homepage.module.css";
 
 const Homepage = () => {
@@ -45,22 +48,22 @@ const Homepage = () => {
     {
       icon: <Mail size={24} />,
       title: "Email Tracking & Templates",
-      description: "Know when clients open emails and use proven templates",
+      description: "See opens and clicks in real-time",
     },
     {
       icon: <BarChart3 size={24} />,
       title: "Smart Pipeline Manager",
-      description: "Automatic updates and intelligent lead prioritization",
+      description: "Automatic lead scoring and updates",
     },
     {
       icon: <Calendar size={24} />,
       title: "Calendar Integration",
-      description: "Seamless scheduling and appointment management",
+      description: "Seamless appointment scheduling",
     },
     {
       icon: <FolderOpen size={24} />,
       title: "Client File Storage",
-      description: "Organized document management by client",
+      description: "Instant access to any document",
     },
   ];
 
@@ -85,7 +88,7 @@ const Homepage = () => {
       role: "Car Dealership Manager",
       company: "Premier Auto Sales",
       quote:
-        "Our follow-up rate went from 30% to 85%. We're closing deals that would have walked away before. The email tracking shows exactly when customers are ready to buy.",
+        "Follow-up rate increased from 30% to 85%. We're closing deals that would have walked away before. The email tracking shows exactly when customers are ready to buy.",
       rating: 5,
     },
     {
@@ -93,7 +96,7 @@ const Homepage = () => {
       role: "Gym Manager",
       company: "FitLife Wellness Center",
       quote:
-        "Member retention improved dramatically. I can see who's engaged and who needs attention. The automated follow-ups for trial members converted 40% more signups.",
+        "Member retention improved dramatically, 40% more signups from better follow-ups. I can see who's engaged and who needs attention. The automated sequences converted trial members consistently.",
       rating: 5,
     },
     {
@@ -101,7 +104,7 @@ const Homepage = () => {
       role: "Mortgage Broker",
       company: "Secure Home Lending",
       quote:
-        "Game changer for managing my pipeline. I closed 3 extra deals last month just from better follow-up timing. The client file storage keeps everything organized.",
+        "Closed 3 extra deals last month from better timing. Game changer for managing my pipeline. The client file storage keeps everything organized and accessible.",
       rating: 5,
     },
     {
@@ -109,7 +112,7 @@ const Homepage = () => {
       role: "Pest Control Manager",
       company: "Guardian Pest Solutions",
       quote:
-        "Seasonal reminders and follow-ups are automatic now. Customer callbacks increased 60% and our recurring service retention is at an all-time high.",
+        "Customer callbacks increased 60% with automated reminders. Seasonal follow-ups are automatic now and our recurring service retention is at an all-time high.",
       rating: 5,
     },
   ];
@@ -130,36 +133,63 @@ const Homepage = () => {
             </div>
 
             <h1 className={styles.heroTitle}>
-              Customer Relationship Management (CRM) for Service Professionals
+              Free CRM That Tracks Every Client Interaction
             </h1>
             <p className={styles.heroSubtitle}>
-              Track engagement, automate follow-ups, and prioritize leads in one
-              intelligent platform.
+              See exactly when clients open your emails. Know who's ready to
+              buy. No cost, no limits.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.heroForm}>
               <div className={styles.formGroup}>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter email for instant access"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={styles.emailInput}
                   required
                 />
                 <button type="submit" className={styles.ctaButton}>
-                  Get Started
+                  Start Now
                   <ArrowRight size={16} />
                 </button>
               </div>
-              <button
-                type="button"
-                onClick={() => navigate("/demo")}
-                className={styles.demoLink}
-              >
-                View Demo
-              </button>
+              <div className={styles.socialProofLine}>
+                Join 2,800+ professionals
+              </div>
             </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section - Moved to position #2 */}
+      <section className={styles.testimonials}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>
+            Proven Results for Professionals
+          </h2>
+          <div className={styles.testimonialsGrid}>
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className={styles.testimonialCard}>
+                <div className={styles.testimonialRating}>
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={16} className={styles.starIcon} />
+                  ))}
+                </div>
+                <blockquote className={styles.testimonialQuote}>
+                  "{testimonial.quote}"
+                </blockquote>
+                <div className={styles.testimonialAuthor}>
+                  <div className={styles.authorInfo}>
+                    <div className={styles.authorName}>{testimonial.name}</div>
+                    <div className={styles.authorRole}>
+                      {testimonial.role}, {testimonial.company}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -168,7 +198,7 @@ const Homepage = () => {
       <section className={styles.problemSolution}>
         <div className={styles.container}>
           <h2 className={styles.problemTitle}>
-            Stop Losing Deals to Poor Follow-Up
+            Track Every Client Interaction That Matters
           </h2>
           <div className={styles.solutionsList}>
             {problemSolutions.map((solution, index) => (
@@ -200,36 +230,52 @@ const Homepage = () => {
               </div>
             ))}
           </div>
+          <div className={styles.demoLinkContainer}>
+            <button
+              onClick={() => navigate("/demo")}
+              className={styles.demoLinkButton}
+            >
+              See How It Works
+              <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className={styles.testimonials}>
+      {/* Screenshots Section */}
+      <section className={styles.screenshots}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>
-            Proven Results for Professionals
-          </h2>
-          <div className={styles.testimonialsGrid}>
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className={styles.testimonialCard}>
-                <div className={styles.testimonialRating}>
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} className={styles.starIcon} />
-                  ))}
-                </div>
-                <blockquote className={styles.testimonialQuote}>
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.authorInfo}>
-                    <div className={styles.authorName}>{testimonial.name}</div>
-                    <div className={styles.authorRole}>
-                      {testimonial.role}, {testimonial.company}
-                    </div>
-                  </div>
-                </div>
+          <h2 className={styles.sectionTitle}>See Your CRM in Action</h2>
+          <div className={styles.screenshotsGrid}>
+            <div className={styles.screenshotItem}>
+              <WorksheetScreenshot />
+              <div className={styles.screenshotCaption}>
+                <h3>Client Data Manager</h3>
+                <p>
+                  Track all your clients in one organized view with real-time
+                  updates
+                </p>
               </div>
-            ))}
+            </div>
+            <div className={styles.screenshotItem}>
+              <EmailScreenshot />
+              <div className={styles.screenshotCaption}>
+                <h3>Email Tracking</h3>
+                <p>
+                  See exactly when clients open your emails and click your links
+                </p>
+              </div>
+            </div>
+            <div className={styles.screenshotItem}>
+              <CalendarScreenshot />
+              <div className={styles.screenshotCaption}>
+                <h3>Calendar & Actions</h3>
+                <p>
+                  Never miss a follow-up with integrated calendar and task
+                  management
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -239,17 +285,17 @@ const Homepage = () => {
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              Start Managing Clients More Effectively Today
+              Start Tracking Client Engagement Today
             </h2>
             <p className={styles.ctaDescription}>
-              Join 2,800+ professionals saving time and closing more deals
+              Join 2,800+ professionals who track every client interaction
             </p>
             <div className={styles.ctaActions}>
               <button
                 onClick={handleGetStarted}
                 className={styles.finalCtaButton}
               >
-                Start Your Free Account
+                Start Now
                 <ArrowRight size={16} />
               </button>
             </div>

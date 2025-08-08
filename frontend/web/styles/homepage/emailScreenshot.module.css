@@ -1,0 +1,354 @@
+/* Email Screenshot Component */
+.mockupContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+
+.mockupWindow {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.mockupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.mockupControls {
+  display: flex;
+  gap: 8px;
+}
+
+.mockupControl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e1e5e9;
+}
+
+.mockupControl:first-child {
+  background: #ff5f57;
+}
+
+.mockupControl:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.mockupControl:nth-child(3) {
+  background: #28ca42;
+}
+
+.mockupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.mockupActions {
+  display: flex;
+  gap: 8px;
+}
+
+.mockupButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mockupButton:hover {
+  background: #106ebe;
+}
+
+.emailComposer {
+  background: #ffffff;
+}
+
+.emailHeader {
+  padding: 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emailField {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emailField label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+  min-width: 60px;
+}
+
+.emailField input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #323130;
+  background: #ffffff;
+}
+
+.templateSelector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.templateSelector label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #323130;
+  min-width: 60px;
+}
+
+.templateSelector select {
+  padding: 8px 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #323130;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.emailBody {
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.emailContent {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #323130;
+}
+
+.emailContent p {
+  margin: 0 0 12px 0;
+}
+
+.emailContent ul {
+  margin: 8px 0 12px 20px;
+  padding: 0;
+}
+
+.emailContent li {
+  margin: 4px 0;
+}
+
+.emailContent strong {
+  font-weight: 600;
+  color: #0078d4;
+}
+
+.emailActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-top: 1px solid #e1e5e9;
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sendButton:hover {
+  background: #15803d;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  background: #ffffff;
+  color: #323130;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background: #f8f9fa;
+}
+
+.trackingStats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 16px;
+  background: #f0f9ff;
+  border-top: 1px solid #e1e5e9;
+}
+
+.trackingStat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #0078d4;
+  font-weight: 600;
+}
+
+.trackingStat svg {
+  color: #0078d4;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .mockupContainer {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .mockupWindow {
+    border-radius: 8px;
+  }
+
+  .mockupHeader {
+    padding: 8px 12px;
+  }
+
+  .mockupTitle {
+    font-size: 12px;
+  }
+
+  .mockupActions {
+    gap: 4px;
+  }
+
+  .mockupButton {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .emailHeader {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .emailField {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .emailField label {
+    min-width: auto;
+    font-size: 12px;
+  }
+
+  .emailField input {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .templateSelector {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .templateSelector label {
+    min-width: auto;
+    font-size: 12px;
+  }
+
+  .templateSelector select {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .emailBody {
+    padding: 12px;
+    max-height: 300px;
+  }
+
+  .emailContent {
+    font-size: 12px;
+  }
+
+  .emailActions {
+    padding: 12px;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .sendButton,
+  .saveButton {
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .trackingStats {
+    padding: 8px 12px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .trackingStat {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .emailBody {
+    max-height: 250px;
+  }
+
+  .emailContent {
+    font-size: 11px;
+  }
+
+  .trackingStats {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .trackingStat {
+    justify-content: center;
+  }
+}
