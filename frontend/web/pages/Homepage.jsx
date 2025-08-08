@@ -133,11 +133,11 @@ const Homepage = () => {
             </div>
 
             <h1 className={styles.heroTitle}>
-              Free CRM That Tracks Every Client Interaction
+              CRM That Tracks Every Client Interaction
             </h1>
             <p className={styles.heroSubtitle}>
-              See exactly when clients open your emails. Know who's ready to
-              buy. No cost, no limits.
+              Effortlessly intuitive, powerfully intelligent. AI-powered
+              tracking shows exactly when clients engage and who's ready to buy.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.heroForm}>
@@ -156,7 +156,7 @@ const Homepage = () => {
                 </button>
               </div>
               <div className={styles.socialProofLine}>
-                Join 2,800+ professionals
+                Join 2,800+ professionals • Free of cost
               </div>
             </form>
           </div>
