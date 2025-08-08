@@ -130,7 +130,7 @@ const Homepage = () => {
             </div>
 
             <h1 className={styles.heroTitle}>
-              Transform Client Interactions Into Lasting Business Relationships
+              Customer Relationship Management (CRM) for Service Professionals
             </h1>
             <p className={styles.heroSubtitle}>
               Track engagement, automate follow-ups, and prioritize leads in one

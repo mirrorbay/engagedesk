@@ -142,6 +142,116 @@ function Analytics() {
     };
   };
 
+  const downloadCSV = () => {
+    if (!analyticsData.length) {
+      alert("No data available to download");
+      return;
+    }
+
+    // Define CSV headers
+    const headers = [
+      "Visit Time",
+      "IP Address",
+      "Country",
+      "Region",
+      "City",
+      "Is Local",
+      "Device Platform",
+      "Device OS",
+      "Device Browser",
+      "Page Path",
+      "Referrer",
+      "Visit Duration (ms)",
+      "Visit Duration (formatted)",
+      "Session End Time",
+      "Max Scroll Depth (%)",
+      "Scroll Events Count",
+      "Click Events Count",
+      "Click Events Details",
+    ];
+
+    // Convert data to CSV rows
+    const csvRows = analyticsData.map((item) => {
+      const location = item.location || {};
+      const deviceInfo = item.device_info || {};
+      const clickEventsDetails =
+        item.click_events
+          ?.map(
+            (event) =>
+              `${formatTimestamp(event.click_timestamp)} - ${
+                event.element_tag || "N/A"
+              }${event.element_id ? "#" + event.element_id : ""}${
+                event.element_class ? "." + event.element_class : ""
+              }${event.element_text ? ' "' + event.element_text + '"' : ""}`
+          )
+          .join("; ") || "";
+
+      return [
+        formatTimestamp(item.visit_timestamp),
+        item.ip_address,
+        location.country || "Unknown",
+        location.region || "Unknown",
+        location.city || "Unknown",
+        location.isLocal ? "Yes" : "No",
+        deviceInfo.platform || "Unknown",
+        deviceInfo.os || "Unknown",
+        deviceInfo.browser || "Unknown",
+        item.page_path,
+        item.referrer || "Direct",
+        item.visit_duration || "",
+        item.visit_duration ? formatDuration(item.visit_duration) : "N/A",
+        item.session_end_timestamp
+          ? formatTimestamp(item.session_end_timestamp)
+          : "",
+        item.max_scroll_depth || "",
+        item.scroll_events?.length || 0,
+        item.click_events?.length || 0,
+        clickEventsDetails,
+      ];
+    });
+
+    // Escape CSV values (handle commas, quotes, newlines)
+    const escapeCSVValue = (value) => {
+      if (value === null || value === undefined) return "";
+      const stringValue = String(value);
+      if (
+        stringValue.includes(",") ||
+        stringValue.includes('"') ||
+        stringValue.includes("\n")
+      ) {
+        return `"${stringValue.replace(/"/g, '""')}"`;
+      }
+      return stringValue;
+    };
+
+    // Create CSV content
+    const csvContent = [
+      headers.map(escapeCSVValue).join(","),
+      ...csvRows.map((row) => row.map(escapeCSVValue).join(",")),
+    ].join("\n");
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+
+    // Generate filename with current date and filter info
+    const now = new Date();
+    const dateStr = now.toISOString().split("T")[0];
+    const filterInfo = filters.page_path
+      ? `_${filters.page_path.replace(/[^a-zA-Z0-9]/g, "_")}`
+      : "";
+    const filename = `detailed_analytics_${filters.days}days${filterInfo}_${dateStr}.csv`;
+
+    link.setAttribute("download", filename);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   const totalStats = getTotalStats();
 
   const renderClickEvents = (clickEvents) => {
@@ -629,7 +739,17 @@ function Analytics() {
 
       {/* Analytics Data Table */}
       <div className={styles.tableSection}>
-        <h2>Detailed Analytics</h2>
+        <div className={styles.tableSectionHeader}>
+          <h2>Detailed Analytics</h2>
+          <button
+            onClick={downloadCSV}
+            disabled={loading || analyticsData.length === 0}
+            className={styles.downloadButton}
+            title="Download detailed analytics as CSV"
+          >
+            📥 Download CSV
+          </button>
+        </div>
         <div className={styles.tableContainer}>
           <table className={styles.table}>
             <thead>

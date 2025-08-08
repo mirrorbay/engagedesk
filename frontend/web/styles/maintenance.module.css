@@ -1,139 +1,230 @@
-.maintenanceContainer {
+.container {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  background: #000000;
+  color: #00ff00;
+  font-family: "Courier New", monospace;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
 }
 
-.maintenanceCard {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  padding: 40px;
+.terminal {
   width: 100%;
-  max-width: 480px;
-  text-align: center;
-  animation: slideUp 0.3s ease-out;
+  min-height: 100vh;
+  background: #000000;
+  color: #00ff00;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.errorCode {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 16px;
-}
-
-.maintenanceHeader h1 {
-  color: #1a202c;
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-}
-
-.maintenanceHeader p {
-  color: #718096;
-  font-size: 16px;
-  margin: 0 0 32px 0;
-  line-height: 1.5;
-}
-
-.maintenanceContent {
-  margin: 32px 0;
-}
-
-.messageContainer h2 {
-  color: #2d3748;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.messageContainer p {
-  color: #718096;
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-
-.maintenanceFooter {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
-}
-
-.maintenanceFooter p {
-  color: #718096;
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.supportLink {
-  color: #667eea;
-  text-decoration: underline;
-  font-weight: 600;
-}
-
-.supportLink:hover {
-  color: #5a67d8;
-}
-
-.actionButtons {
+.header {
   display: flex;
-  justify-content: center;
-  margin-top: 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.homeButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.2s ease;
+.title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.homeButton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-  text-decoration: none;
-  color: white;
+.timestamp {
+  font-size: 12px;
+  color: #888888;
+}
+
+.content {
+  line-height: 1.4;
+}
+
+.errorBlock {
+  margin-bottom: 20px;
+  border: 1px solid #ff0000;
+  padding: 10px;
+  background: #1a0000;
+}
+
+.errorHeader {
+  color: #ff4444;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.errorDetails {
+  color: #cccccc;
+  font-size: 12px;
+}
+
+.errorDetails div {
+  margin-bottom: 2px;
+}
+
+.stackTrace {
+  margin-bottom: 20px;
+  background: #0a0a0a;
+  padding: 10px;
+  border-left: 3px solid #ffff00;
+}
+
+.stackHeader {
+  color: #ffff00;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.stackLine {
+  color: #cccccc;
+  font-size: 11px;
+  margin-bottom: 2px;
+  font-family: "Courier New", monospace;
+}
+
+.systemInfo {
+  margin-bottom: 20px;
+  background: #001100;
+  padding: 10px;
+  border-left: 3px solid #00ff00;
+}
+
+.infoHeader {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.systemInfo div:not(.infoHeader) {
+  color: #cccccc;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.errorMessage {
+  margin-bottom: 20px;
+  background: #110000;
+  padding: 10px;
+  border-left: 3px solid #ff8800;
+}
+
+.messageHeader {
+  color: #ff8800;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.errorMessage div:not(.messageHeader) {
+  color: #cccccc;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.logEntries {
+  margin-bottom: 20px;
+  background: #0a0a0a;
+  padding: 10px;
+  border: 1px solid #333333;
+}
+
+.logHeader {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.logLine {
+  color: #888888;
+  font-size: 10px;
+  margin-bottom: 2px;
+  font-family: "Courier New", monospace;
+}
+
+.prompt {
+  margin-top: 30px;
+  font-size: 12px;
+}
+
+.promptText {
+  color: #00ff00;
+}
+
+.cursor {
+  color: #00ff00;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Mobile responsiveness */
 @media (max-width: 640px) {
-  .maintenanceContainer {
-    padding: 16px;
+  .terminal {
+    padding: 10px;
+    font-size: 10px;
   }
 
-  .maintenanceCard {
-    padding: 24px;
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
   }
 
-  .errorCode {
-    font-size: 2.5rem;
+  .title {
+    font-size: 12px;
   }
 
-  .maintenanceHeader h1 {
-    font-size: 24px;
+  .timestamp {
+    font-size: 10px;
   }
 
-  .messageContainer h2 {
-    font-size: 18px;
+  .errorHeader {
+    font-size: 12px;
   }
+
+  .stackHeader,
+  .infoHeader,
+  .messageHeader,
+  .logHeader {
+    font-size: 11px;
+  }
+
+  .stackLine,
+  .logLine {
+    font-size: 9px;
+  }
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
 }

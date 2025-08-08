@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/maintenance.module.css";
+import styles from "../styles/notFound.module.css";
 
-const Maintenance = () => {
+const NotFound = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [blinkCursor, setBlinkCursor] = useState(true);
 
@@ -35,7 +35,7 @@ const Maintenance = () => {
     <div className={styles.container}>
       <div className={styles.terminal}>
         <div className={styles.header}>
-          <span className={styles.title}>System Monitor - Request Handler</span>
+          <span className={styles.title}>System Error - Process Monitor</span>
           <span className={styles.timestamp}>
             {formatTimestamp(currentTime)}
           </span>
@@ -44,7 +44,7 @@ const Maintenance = () => {
         <div className={styles.content}>
           <div className={styles.errorBlock}>
             <div className={styles.errorHeader}>
-              ERROR: Route Resolution Failed
+              FATAL: Unhandled Exception in Request Handler
             </div>
             <div className={styles.errorDetails}>
               <div>Process ID: {processId}</div>
@@ -55,7 +55,7 @@ const Maintenance = () => {
           </div>
 
           <div className={styles.stackTrace}>
-            <div className={styles.stackHeader}>Call Stack:</div>
+            <div className={styles.stackHeader}>Stack Trace:</div>
             <div className={styles.stackLine}>
               {" "}
               at RouteHandler.resolve(route-handler.js:247:12)
@@ -92,7 +92,7 @@ const Maintenance = () => {
           </div>
 
           <div className={styles.errorMessage}>
-            <div className={styles.messageHeader}>Issue Details:</div>
+            <div className={styles.messageHeader}>Error Details:</div>
             <div>Cannot resolve route: Resource not found in routing table</div>
             <div>Attempted path resolution failed</div>
             <div>No fallback handler configured for this endpoint</div>
@@ -105,7 +105,7 @@ const Maintenance = () => {
               resolution timeout
             </div>
             <div className={styles.logLine}>
-              [{formatTimestamp(new Date(Date.now() - 2000))}] INFO: Handler
+              [{formatTimestamp(new Date(Date.now() - 2000))}] ERROR: Handler
               lookup failed
             </div>
             <div className={styles.logLine}>
@@ -133,4 +133,4 @@ const Maintenance = () => {
   );
 };
 
-export default Maintenance;
+export default NotFound;

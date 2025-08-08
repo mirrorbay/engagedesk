@@ -725,12 +725,12 @@ const Demo = () => {
       <section className={styles.hero}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>See How EngageDesk Works</h1>
+            <h1 className={styles.heroTitle}>See How Our CRM Works</h1>
             <p className={styles.heroSubtitle}>
-              Explore the complete client management system built specifically
-              for service professionals. See exactly how each tool helps you
-              stay organized, save time, and grow your business. Click through
-              each feature to see real workflows in action.
+              Explore the complete CRM system built specifically for service
+              professionals. See exactly how each tool helps you stay organized,
+              save time, and grow your business. Click through each feature to
+              see real workflows in action.
             </p>
           </div>
         </div>
