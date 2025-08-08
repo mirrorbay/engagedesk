@@ -46,6 +46,17 @@
   margin: 0;
 }
 
+.formNote {
+  text-align: center;
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
 .authForm {
   display: flex;
   flex-direction: column;
@@ -70,7 +81,12 @@
   font-weight: 600;
 }
 
-.formGroup input {
+.required {
+  color: #e53e3e;
+}
+
+.formGroup input,
+.formGroup select {
   padding: 12px 16px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
@@ -79,7 +95,8 @@
   background: white;
 }
 
-.formGroup input:focus {
+.formGroup input:focus,
+.formGroup select:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -87,6 +104,14 @@
 
 .formGroup input::placeholder {
   color: #a0aec0;
+}
+
+.formGroup select {
+  cursor: pointer;
+}
+
+.formGroup select option {
+  padding: 8px;
 }
 
 .errorMessage {

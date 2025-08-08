@@ -13,7 +13,11 @@ const Register = () => {
     firstName: "",
     lastName: "",
     nickname: "",
+    phoneNumber: "",
+    clientManagementPreference: "",
+    clientManagementOther: "",
   });
+  const [showOtherInput, setShowOtherInput] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
@@ -30,10 +34,20 @@ const Register = () => {
   }, [searchParams]);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Handle showing/hiding the "other" input field
+    if (name === "clientManagementPreference") {
+      setShowOtherInput(value === "other");
+      if (value !== "other") {
+        setFormData((prev) => ({ ...prev, clientManagementOther: "" }));
+      }
+    }
+
     // Clear error when user starts typing
     if (error) setError("");
   };
@@ -43,10 +57,19 @@ const Register = () => {
     setLoading(true);
     setError("");
 
-    const { email, password, confirmPassword } = formData;
+    const { email, password, confirmPassword, clientManagementPreference } =
+      formData;
 
     if (!email || !password) {
       setError("Please fill in all required fields");
+      setLoading(false);
+      return;
+    }
+
+    if (!clientManagementPreference) {
+      setError(
+        "Please select what's most important to you in a client management tool"
+      );
       setLoading(false);
       return;
     }
@@ -81,6 +104,11 @@ const Register = () => {
         <div className={styles.authHeader}>
           <h1>Create Account</h1>
           <p>Join EngageDesk to manage your client relationships</p>
+        </div>
+
+        <div className={styles.formNote}>
+          All fields are optional except those with{" "}
+          <span className={styles.required}>*</span>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.authForm}>
@@ -123,7 +151,9 @@ const Register = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="email">Email Address *</label>
+            <label htmlFor="email">
+              Email Address <span className={styles.required}>*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -136,7 +166,76 @@ const Register = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="password">Password *</label>
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="clientManagementPreference">
+              What's most important to you in a client management tool?{" "}
+              <span className={styles.required}>*</span>
+            </label>
+            <select
+              id="clientManagementPreference"
+              name="clientManagementPreference"
+              value={formData.clientManagementPreference}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select your top priority...</option>
+              <option value="client-follow-up-assistance">
+                Client Follow-up Assistance
+              </option>
+              <option value="automated-email-tracking">
+                Automated Email Tracking
+              </option>
+              <option value="easy-intuitive-interface">
+                Easy & Intuitive Interface
+              </option>
+              <option value="cost-effectiveness">Cost Effectiveness</option>
+              <option value="smart-pipeline-management">
+                Smart Pipeline Management
+              </option>
+              <option value="calendar-scheduling-integration">
+                Calendar & Scheduling Integration
+              </option>
+              <option value="client-file-organization">
+                Client File Organization
+              </option>
+              <option value="real-time-engagement-insights">
+                Real-time Engagement Insights
+              </option>
+              <option value="other">Other (please specify)</option>
+            </select>
+          </div>
+
+          {showOtherInput && (
+            <div className={styles.formGroup}>
+              <label htmlFor="clientManagementOther">
+                Please specify what's most important to you:
+              </label>
+              <input
+                type="text"
+                id="clientManagementOther"
+                name="clientManagementOther"
+                value={formData.clientManagementOther}
+                onChange={handleChange}
+                placeholder="Describe your top priority..."
+              />
+            </div>
+          )}
+
+          <div className={styles.formGroup}>
+            <label htmlFor="password">
+              Password <span className={styles.required}>*</span>
+            </label>
             <input
               type="password"
               id="password"
@@ -149,7 +248,9 @@ const Register = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="confirmPassword">Confirm Password *</label>
+            <label htmlFor="confirmPassword">
+              Confirm Password <span className={styles.required}>*</span>
+            </label>
             <input
               type="password"
               id="confirmPassword"

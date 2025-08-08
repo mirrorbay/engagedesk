@@ -73,6 +73,27 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
+    phoneNumber: {
+      type: String,
+    },
+    clientManagementPreference: {
+      type: String,
+      enum: [
+        "client-follow-up-assistance",
+        "automated-email-tracking",
+        "easy-intuitive-interface",
+        "cost-effectiveness",
+        "smart-pipeline-management",
+        "calendar-scheduling-integration",
+        "client-file-organization",
+        "real-time-engagement-insights",
+        "other",
+        "",
+      ],
+    },
+    clientManagementOther: {
+      type: String,
+    },
     manager: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",

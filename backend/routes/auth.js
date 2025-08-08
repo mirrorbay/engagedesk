@@ -55,8 +55,18 @@ const generateToken = (id) => {
 // @access  Public
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, firstName, lastName, company, position } =
-      req.body;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      nickname,
+      company,
+      position,
+      phoneNumber,
+      clientManagementPreference,
+      clientManagementOther,
+    } = req.body;
 
     // Validate required fields
     if (!email || !password) {
@@ -85,8 +95,12 @@ router.post("/register", async (req, res) => {
       password,
       firstName,
       lastName,
+      nickname,
       company,
       position,
+      phoneNumber,
+      clientManagementPreference,
+      clientManagementOther,
     });
 
     await user.save();
